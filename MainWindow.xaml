@@ -1,0 +1,49 @@
+﻿<Window x:Class="TaskManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskManager" WindowState="Normal"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" x:Name="task"
+        Title="MainWindow" Height="450" Width="800" MaxHeight="700" MaxWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+      
+        <StackPanel Orientation="Horizontal">
+            <ComboBox Width="150" Height="35" Margin="10 0" ItemsSource="{Binding ProcessList}" Text="{Binding Name}"/>
+          
+            
+            <Button  Width="120" Height="35" Margin="10 20 0 20"  
+            Background="DarkOliveGreen" BorderBrush="DarkOliveGreen"
+                 Content="Create process" Foreground="WhiteSmoke" FontSize="15"
+            Command="{Binding Create}" CommandParameter="{Binding ElementName=task}"/>  
+            
+            
+            <Button  Width="120" Height="35" Margin="220 20 0 20"  
+            Background="DarkOliveGreen" BorderBrush="DarkOliveGreen"
+                 Content="End process" Foreground="WhiteSmoke" FontSize="15"
+            Command="{Binding End}" CommandParameter="{Binding ElementName=task}"/>
+            
+            
+            <Button  Width="120" Height="35" Margin="10 20"  
+            Background="DarkOliveGreen" BorderBrush="DarkOliveGreen"
+                 Content="Add Blacklist" Foreground="WhiteSmoke" FontSize="15"
+            Command="{Binding AddBlackList}" CommandParameter="{Binding ElementName=task}"/>
+            
+            
+        </StackPanel>
+        <ListView ItemsSource="{Binding Processes}" Grid.Row="1" SelectedItem="{Binding selectedItem}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding ProcessName}" Width="150"/>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="100"/>
+                    <GridViewColumn Header="Machine Name" DisplayMemberBinding="{Binding MachineName}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>
